@@ -105,6 +105,7 @@ contract bigInt
 
     function mod2(uint8[2] x, uint8[2] m) returns(uint8[2])
     {
+        // Check some special cases
         if (compa(m, [0, 0]) == 0)
             throw;
         if (compa(x, [0, 0]) == 0)
@@ -116,6 +117,7 @@ contract bigInt
 
         uint8[2] memory r = x;
 
+        // Subtract
         while (compa(r, m) != -1)
             (r,) = sub(r, m);
 
@@ -124,6 +126,7 @@ contract bigInt
 
     function mod(uint8[2] x, uint8[2] m) returns(uint8[2])
     {
+        // Check some special cases
         if (compa(m, [0, 0]) == 0)
             throw;
         if (compa(x, [0, 0]) == 0)
@@ -136,11 +139,13 @@ contract bigInt
         uint8[2] memory r = x;
         uint8[2] memory n = m;
 
+        // Align most significant bit
         while (compa(x, n) == 1 && n[n.length-1] & 0x80 != 1)
             n = shift(n, 1);
         if (compa(n, x) == 1)
             n = shift(n, -1);
 
+        // Subtract
         while (compa(r, m) != -1)
         {
             (r,) =  sub(r, n);
