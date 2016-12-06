@@ -1,2 +1,2 @@
 # Python Oracle
-Use ntplib to puch unix time on to the blockchain.
+Use ntplib to push unix time on to the blockchain.
