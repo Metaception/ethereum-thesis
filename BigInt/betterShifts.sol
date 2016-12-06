@@ -128,7 +128,8 @@ contract bigInt
         // Subtract
         while (compa(r, m) != -1)
         {
-            (r,) =  sub(r, n);
+            if (compa(r, n) != -1)
+                (r,) =  sub(r, n);
             n =     rightShift(n);
         }
         return r;
