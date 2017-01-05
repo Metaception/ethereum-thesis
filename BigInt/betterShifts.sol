@@ -1,8 +1,8 @@
 pragma solidity ^0.4.2;
 
-contract bigInt
+contract BigInt
 {
-    function compa(uint8[2] x, uint8[2] y) returns(int8)
+    function compa(uint8[2] x, uint8[2] y) constant returns(int8)
     {
         /*if (x.length > y.length)
             for (uint i = y.length; i < x.length; ++i)
@@ -34,7 +34,7 @@ contract bigInt
         return 0;
     }
 
-    function add(uint8[2] x, uint8[2] y) returns(uint8[2], uint8)
+    function add(uint8[2] x, uint8[2] y) constant returns(uint8[2], uint8)
     {
         uint8[2] memory sum;
         uint8 carry =   0;
@@ -42,7 +42,7 @@ contract bigInt
         for (uint i = 0; i < x.length; ++i)
         {
             sum[i] =    x[i] + y[i] + carry;
-            if (x[i] > 255 - y[i])
+            if (x[i] > 255 - y[i] - carry)
                 carry = 1;
             else
                 carry = 0;
@@ -51,7 +51,7 @@ contract bigInt
         return (sum, carry);
     }
 
-    function sub(uint8[2] x, uint8[2] y) returns(uint8[2], uint8)
+    function sub(uint8[2] x, uint8[2] y) constant returns(uint8[2], uint8)
     {
         uint8[2] memory diff;
         uint8 borrow =  0;
@@ -68,7 +68,7 @@ contract bigInt
         return (diff, borrow);
     }
 
-    function leftShift(uint8[2] x) private returns(uint8[2])
+    function leftShift(uint8[2] x) private constant returns(uint8[2])
     {
         if (compa(x, [0, 0]) == 0)
             return x;
@@ -85,7 +85,7 @@ contract bigInt
         return r;
     }
 
-    function rightShift(uint8[2] x) private returns(uint8[2])
+    function rightShift(uint8[2] x) private constant returns(uint8[2])
     {
         if (compa(x, [0, 0]) == 0)
             return x;
@@ -104,7 +104,7 @@ contract bigInt
         return r;
     }
 
-    function mod(uint8[2] x, uint8[2] m) returns(uint8[2])
+    function mod(uint8[2] x, uint8[2] m) constant returns(uint8[2])
     {
         // Check some special cases
         if (compa(m, [0, 0]) == 0)
@@ -120,7 +120,7 @@ contract bigInt
         uint8[2] memory n = m;
 
         // Align most significant bit
-        while (compa(x, n) == 1 && n[n.length-1] & 0x80 != 1)
+        while (compa(x, n) == 1 && n[n.length-1] & 0x80 != 0x80)
             n = leftShift(n);
         if (compa(n, x) == 1)
             n = rightShift(n);
@@ -135,7 +135,7 @@ contract bigInt
         return r;
     }
 
-    function addiMod(uint8[2] x, uint8[2] y, uint8[2] m) returns(uint8[2])
+    function addiMod(uint8[2] x, uint8[2] y, uint8[2] m) constant returns(uint8[2])
     {
         uint8[2] memory r = [0, 0];
         uint8 carry;
