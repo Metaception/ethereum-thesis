@@ -1,0 +1,5 @@
+personal.unlockAccount(eth.coinbase, 'node1');
+
+var timeStamper = eth.contract([{"constant":false,"inputs":[{"name":"x","type":"uint256"}],"name":"set","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"get","outputs":[{"name":"retVal","type":"uint256"}],"payable":false,"type":"function"}]).at('0x2b1da9a55de9949fae188a190fc88aba09102391');
+
+var expenses = eth.contract([{"constant":false,"inputs":[{"name":"expense","type":"uint256"}],"name":"add","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"total","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"reset","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"type":"function"}]).at('0xac1539364c0662b5e77a99de2c9a61baa62d75a2')
