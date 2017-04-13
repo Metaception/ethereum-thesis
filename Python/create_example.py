@@ -3,13 +3,13 @@ from paillier.paillier import *
 
 
 print("Generating keypair...")
-priv, pub =	generate_keypair(228)
+priv, pub =	generate_keypair(256)
 print(priv)
 print(pub)
 hex_n_sq =	hex(pub.n_sq)
 print(['0x'+hex_n_sq[-64:], hex_n_sq[:-64]], '\n')
 
-x = 3
+x = 0
 print("x =", x)
 print("Encrypting x...")
 cx = encrypt(pub, x)
